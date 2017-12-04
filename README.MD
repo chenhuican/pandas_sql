@@ -1,2 +1,2 @@
 #pandas_sql
-pandas 数据分析案例分享
+pandas 鏁版嵁鍒嗘瀽妗堜緥鍒嗕韩
