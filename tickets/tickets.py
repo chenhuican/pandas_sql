@@ -37,6 +37,7 @@ def get_ticketsinfo():
 	#pprint(res.json(),indent=4)
 	#jsons = json.loads(res.text)
 	#print(jsons)
+	#json 返回json方法，json()返回json数据
 	trains_json = res.json()
 	print(trains_json['data'])
 	options = ''.join([
