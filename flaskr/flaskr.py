@@ -8,6 +8,7 @@ import sqlite3
 #配置文件
 DATABASE = 'flaskr.db'
 DEBUG = True
+#secret_key是需要为了保持客户端的会话安全。明智地选择该键，使得它难以猜测，最好是尽可能复杂。
 SECRET_KEY = 'xffgffg'
 USERNAME = 'admin'
 PASSWORD = '123456'
@@ -23,10 +24,12 @@ app.config.from_object(__name__)
 
 #app.config.from_envvar('FLASKR_SETTINGS',silent=True)
 
+#这个方法用于在请求时打开一个连接，并且在交互式 Python shell 和脚本中也能使用。这对以后很方便
 def connect_db():
 	return sqlite3.connect(app.config['DATABASE'])
 
 def init_db():
+	#@closing 如果一个对象没有实现上下文，我们就不能把它用于with语句。这个时候，可以用closing()来把该对象变为上下文对象
 	with closing(connect_db()) as db:
 		with app.open_resource('schema.sql') as f:
 			db.cursor().executescript(f.read().decode())
@@ -37,6 +40,11 @@ def init_db():
 def before_request():
 	g.db = connect_db()
 
+'''
+所有我们的函数中需要数据库连接，因此在请求之前初始化它们，在请求结束后自动关闭他们就很有意义。
+
+Flask 允许我们使用before_request()，after_request()和 teardown_request()装饰器来实现这个功能:
+'''
 @app.teardown_request
 def teardown_request(exception):
 	g.db.close()
