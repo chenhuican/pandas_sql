@@ -43,7 +43,9 @@ def before_request():
 '''
 所有我们的函数中需要数据库连接，因此在请求之前初始化它们，在请求结束后自动关闭他们就很有意义。
 
-Flask 允许我们使用before_request()，after_request()和 teardown_request()装饰器来实现这个功能:
+Flask 允许我们使用before_request()，after_request()和 teardown_request()装饰器来实现这个功能,
+请记住，销毁函数是一定会被执行的。即使请求前处理器执行失败或根本没有执行，
+ @teardown_request 销毁函数也会被执行。因此，我们必须保证在关闭数据库连接之前数据库连接是存在 的。
 '''
 @app.teardown_request
 def teardown_request(exception):
