@@ -5,11 +5,25 @@
 	<title>test datatables dom</title>
 	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
 	<!-- jQuery -->
-	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript<li>" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<!-- DataTables -->
 	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
 </head>
 <body>
+    <p>参见：http://www.datatables.club/manual/data.html</p>
+    <p><b>Data sources</b>
+        <ul>
+        DataTables 支持三种数据源显示：
+        <li>DOM</li>
+        <li>JavaScript</li>
+        <li>Ajax</li>
+        <li>DOM</li>
+        </ul>
+        DataTables 初始化后，它会自动检查表格中的数据，如果存在即作为表显示的数据 （注意，如果你这时使用data或者ajax传递数据将不会显示），这是使用 DataTables 最简单的方法，渲染已经存在的table
+
+        注意,当使用DOM显示表,DataTables 将会把数据当做数组作为数据源(见上)。
+
+        DataTables还可以直接把 DOM 数据转化为自己的内部数据对象，示例如下：</p>
    <button id="table_id_example_button">获取选中的行</button>
     <table id="table_id_example" class="display">
         <thead>
