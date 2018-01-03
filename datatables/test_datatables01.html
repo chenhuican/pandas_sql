@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>datatables test</title>
+	<!--第一步：引入Javascript / CSS （CDN）-->
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+	<!-- jQuery -->
+	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<!-- DataTables -->
+	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+</head>
+<body>
+<!--第二步：添加如下 HTML 代码-->
+<table id="table_id_example" class="display">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Office</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+ <script type="text/javascript">
+	 var data = [
+	        {
+	            "name":       "Tiger Nixon",
+	            "position":   "System Architect",
+	            "salary":     "$3,120",
+	            "start_date": "2011/04/25",
+	            "office":     "Edinburgh",
+	            "extn":       "5421"
+	        },
+	        {
+	            "name":       "Garrett Winters",
+	            "position":   "Director",
+	            "salary":     "$5,300",
+	            "start_date": "2011/07/25",
+	            "office":     "Edinburgh",
+	            "extn":       "8422"
+	        }
+	    ];
+	<!--第三步：初始化Datatables-->
+	// $(document).ready( function () {
+	//     $('#table_id_example').DataTable({
+	//     	data:data,
+	//     	columns:[
+	//     		{data:'name'},
+	//     		{data:'position'},
+	//     		{data:'salary'},
+	//     		{data:'office'}
+	//     	]
+	//     });
+	// });
+	function Employee(name,position,salary,office){
+		this.name = name;
+		this.position = position;
+		this.salary = salary;
+		this._office = office;
+
+		this.office = function(){
+			return this._office;
+		}
+	};
+	$('#table_id_example').DataTable({
+		data:[
+			new Employee("Tiger Nixon1","System Architect", "$3,120", "Edinburgh"),
+			new Employee("Garrett Winters1", "Director", "$5,300", "Edinburgh")
+		],
+		columns:[
+			{"data":'name'},
+			{"data":'salary'},
+			{"data":'office()'},
+			{"data":'position'}
+		]
+	});
+ </script>
+</body>
+</html>
