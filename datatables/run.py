@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 from flask_wtf import Form
 from wtforms.fields.html5 import DateField
 app = Flask(__name__)
@@ -11,7 +11,7 @@ class ExampleForm(Form):
 
 @app.route('/', methods=['POST','GET'])
 def hello_world():
-    form = ExampleForm()
+    form = ExampleForm(request.form)
     if form.validate_on_submit():
         return form.dt.data.strftime('%Y-%m-%d')
     return render_template('example.html', form=form)
